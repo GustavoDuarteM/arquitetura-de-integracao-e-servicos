@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: infnet-guia-deployment
+spec:
+  replicas: 4
+  template:
+    metadata:
+      name: infnet-guia-app
+      labels:
+        app: infnet-guia-app
+    spec:
+      containers:
+        - name: infnet-guia-app-container
+          image: gustavogdm/infnet-guia-app:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+  selector:
+    matchLabels:
+      app: infnet-guia-app
