@@ -2,8 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: infnet-guia-service
-  labels:
-    app: infnet-guia-app
+  namespace: application
 spec:
   selector:
     app: infnet-guia-app

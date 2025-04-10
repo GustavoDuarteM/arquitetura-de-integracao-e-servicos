@@ -13,12 +13,11 @@ spec:
       containers:
         - name: infnet-guia-app-container
           image: gustavogdm/infnet-guia-app:latest
-          imagePullPolicy: Never
           ports:
             - containerPort: 3000
           livenessProbe:
             httpGet:
-              path: /health
+              path: /api/health-check
               port: 3000
             initialDelaySeconds: 5
             periodSeconds: 10
